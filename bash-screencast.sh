@@ -5,49 +5,12 @@
 TERM_COLUMNS="$(tput cols)"
 TERM_LINES="$(tput lines)"
 
-### Creates a mask of equal length string.
-### Usage: fill_mask var str [full-length]
-fill_mask()
-{
-__fill_mask()
-{
-	local m=
-	while :; do
-		case $((${#1} - ${#m})) in
-			0) break ;;
-			1) m="$m?" ;;
-			2) m="$m??" ;;
-			3) m="$m???" ;;
-			4) m="$m????" ;;
-			5) m="$m?????" ;;
-			6) m="$m??????" ;;
-			7) m="$m???????" ;;
-			8) m="$m????????" ;;
-			9) m="$m?????????" ;;
-			*) m="$m??????????" ;;
-		esac
-	done
-	__fill_masko="${m#$2}"
-}
-	local __fill_masko
-	__fill_mask "$2" "${3:-?}"
-	unset -f __fill_mask
-	eval "$1=\$__fill_masko"
-}
-
 string()
 {
-	local c m s="$1"
-
-	fill_mask m "$s"
-	while [ "${#s}" != 0 ]; do
-		c="${s%$m}"
-
-		printf '%s' "$c"
+	local s="$1"
+	for (( i=0; i < ${#s}; i++ )); do
+		printf "%s" "${s:$i:1}"
 		sleep "${2:-0.05}"
-
-		s="${s#?}"
-		m="${m#?}"
 	done
 }
 
