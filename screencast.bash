@@ -1,6 +1,6 @@
 #!/bin/bash -efu
 ### This file is covered by the GNU General Public License,
-### which should be included with bash-screencast.sh as the file LICENSE.
+### which should be included with screencast.bash as the file LICENSE.
 
 TERM_COLUMNS="$(tput cols)"
 TERM_LINES="$(tput lines)"
