@@ -25,7 +25,7 @@ pauseMark()
 {
 	echo -ne '\033[s'
 	echo -ne '\r'
-	[ -n "${1-}" ] && echo '.' || echo ' '
+	[ -n "${1-}" ] && echo -n '.' || echo -n ' '
 	echo -ne '\033[u'
 }
 
